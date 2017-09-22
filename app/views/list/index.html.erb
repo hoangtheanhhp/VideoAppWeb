@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-md-6">
+    <div id="player"></div>
+  </div>
+  <div class="col-md-6">
+    <ul class="list-group">
+      <button class="btn btn-info">Play</button>
+      <% @list.each do |video| %>
+          <li class="list-group-item">
+            <div id="media">
+              <div class="media">
+                    <div class="media-left" id="<%=video.uid%>">
+                      <%= image_tag("https://img.youtube.com/vi/#{video.uid}/hqdefault.jpg",size: "150x150", class: "media-object img-thumbnail img-responsive")%>
+                    </div>
+                    <div class="media-body">
+                      <%= content_tag( :h5, video.title)%>
+                    </div>
+              </div>
+            </div>
+          </li>
+          </ul>
+      <% end %>
+  </div>
+</div>
+<script>
+    var tag = document.createElement('script');
+    tag.src = "http://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '320',
+            width: '520',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    var videos = new Array();
+    <% @list.each do |video|%>
+        videos.push({vid: '<%=video.uid%>',startSeconds: 0});
+    <% end %>
+    var index = 0;
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.cueVideoById({
+            videoId: videos[index].vid,
+            startSeconds: videos[index].startSeconds
+        });
+        event.target.playVideo();
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.ENDED) {
+            if (index < videos.count() - 1) {
+
+                event.target.loadVideoById({
+                    videoId: videos[index].vid,
+                    startSeconds: videos[index].startSeconds
+                });
+                index++;
+            }
+        }
+    }
+</script>

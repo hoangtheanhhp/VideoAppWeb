@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= yield :title%></title>
+    <%= render 'layouts/rails_default'%>
+  </head>
+  <body>
+  <%= render "layouts/header" %>
+  <div class="container">
+    <%= yield %>
+  </div>
+  <script>
+      $(document).ready(function(){
+          $("#sel1").change(function(){
+              var selectNum = $(this).val();
+              $.get("/home/ajax/"+selectNum, function(data){
+                 $("#new").html(data);
+              });
+          });
+      });
+
+  </script>
+  </body>
+</html>

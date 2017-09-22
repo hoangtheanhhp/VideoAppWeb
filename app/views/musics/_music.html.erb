@@ -1,0 +1,51 @@
+  <li class="list-group-item">
+    <div class="media">
+     <% if !music.banned? %>
+        <div class="media-left">
+          <%= image_tag("https://img.youtube.com/vi/#{music.link}/hqdefault.jpg",size: "150x150", class: "media-object img-thumbnail img-responsive") %>
+        </div>
+        <div class="media-body">
+          <%= link_to content_tag(:h4,music.user.name), music.user, class: "media-heading" %>
+          <%= content_tag( :p, "https://www.youtube.com/watch?v=#{music.link}")%>
+          <span class="glyphicon glyphicon-time date"></span> <span><%= time_ago_in_words(music.created_at) %> ago </span>
+        </div>
+
+     <% end %>
+     <% if music.banned? && (current_user.admin? || current_user?(music.user)) %>
+          <div class="media-left">
+            <%= image_tag("https://img.youtube.com/vi/#{music.link}/hqdefault.jpg",size: "150x150", class: "media-object img-thumbnail img-responsive") %>
+          </div>
+          <div class="media-body">
+            <%= link_to content_tag(:h4,music.user.name), music.user, class: "media-heading" %>
+            <%= content_tag(:p, "https://www.youtube.com/watch?v=#{music.link}", style: "color: #ff0000")%>
+            <span class="glyphicon glyphicon-time date"></span> <span><%= time_ago_in_words(music.created_at) %> ago </span>
+            <strong><%= content_tag(:h4, "Banned", style: "color:red", class: "text-danger") %></strong>
+          </div>
+
+  <% end %>
+      </div>
+    <hr>
+    <% if current_user.admin? %>
+      <% if music.banned? %>
+
+            <a href="/ban/<%=music.id%>" role="button" class="btn btn-danger btn-sm">Banned</a>
+
+      <% else %>
+            <%= link_to  content_tag(:span,"", class:"glyphicon glyphicon-play")+"Play", music,
+                        role: "button", class: "btn btn-primary btn-sm", target: "_blank"%>
+            <!--<a role="button" class="btn btn-primary btn-sm" target="_blank" href="<%= music %>"><span class="glyphicon glyphicon-play"></span> Play</a>-->
+            <!--<a href="/ban/<%=music.id%>" role="button" class="btn btn-info btn-sm">Upvote</a>-->
+            <!--<a href="/ban/<%=music.id%>" role="button" class="btn btn-info btn-sm">Downvote</a>-->
+            <% if session[:list_music].include? music %>
+                 <%= link_to "Drop", "/dropmusic/#{music.id}", class: "btn btn-primary btn-sm"%>
+            <% else %>
+                <%= link_to "Push", "/addmusic/#{music.id}", class: "btn btn-primary btn-sm"%>
+            <% end %>
+            <a href="/ban/<%=music.id%>" role="button" class="btn btn-success btn-sm">Ban</a>
+      <% end %>
+    <% end %>
+
+    <% if current_user?(music.user) %>
+         <%= link_to "Delete", music,role: "button", class: "btn btn-danger btn-sm", method: :delete, data: {confirm: "You sure?"} %>
+    <% end %>
+  </li>

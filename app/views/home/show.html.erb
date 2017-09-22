@@ -1,0 +1,51 @@
+<%= provide(:title, "Show") %>
+<% if logged_in? %>
+    <div class="row">
+      <div class="col-md-4">
+        <%= render 'shared/time'%>
+        <div id="player1"></div>
+      </div>
+      <div class="col-md-6">
+        <%= render 'shared/post_form' %>
+        <% if @videos.any? %>
+            <ul class="list-group">
+              <div id="new">
+                <%= render @videos %>
+              </div>
+            </ul>
+            <%= will_paginate @videos %>
+      <% end %>
+      </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            <% @videos.each do |video| %>
+            $("#img-<%=video.uid%>").click(function(){
+                console.log("ok");
+                $("#player1").html("<iframe width='360' height='240' src='https://www.youtube.com/embed/<%= video.uid%>?autoplay=1' frameborder='0' allowfullscreen></iframe>");
+            });
+            $("#menu-push-<%=video.uid%>").click(function(){
+                $.get("/sessions/push/<%=video.uid%>");
+                $("#1").html('<li><a id="menu-drop-<%=video.uid%>">Drop</a>');
+            });
+            $("#menu-drop-<%=video.uid%>").click(function(){
+                $.get("/sessions/drop/<%=video.uid%>");
+                $("#2").html('<li><a id="menu-push-<%=video.uid%>">Push</a>');
+            });
+            $("#menu-ban-<%=video.uid%>").click(function(){
+                $.get("/videos/ban/<%=video.uid%>");
+            });
+            <% end %>
+        });
+    </script>
+<% else %>
+    <div class="row">
+      <div class="jumbotron">
+        <div class="container">
+          <h1>Welcome to TADITube</h1>
+          <p>Click the button below to push your video from YouTube.</p>
+          <%= link_to "Log in now!", "/auth/google_oauth2", class: "btn btn-primary btn-lg" %>
+        </div>
+    </div>
+    </div>
+<%end %>

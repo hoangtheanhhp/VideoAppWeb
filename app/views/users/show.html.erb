@@ -1,0 +1,18 @@
+<%= provide(:title, @user.name) %>
+<div class="row">
+    <div class="col-md-4">
+        <%= render "shared/time" %>
+    </div>
+    <div class="col-md-6">
+      <% if @user.videos.any? %>
+        <h3> <%=@user.name%>'s music (<%= @user.videos.count %>)</h3>
+        <%= render 'shared/post_form' if logged_in? && current_user == @user %>
+
+        <ul class="list-group">
+          <%= render @videos %>
+          <%= will_paginate @videos%>
+        </ul>
+      <% end %>
+
+    </div>
+</div>

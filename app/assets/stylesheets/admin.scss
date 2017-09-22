@@ -1,0 +1,15 @@
+.list-gruop-item-music{
+  #media{
+    display: flex;
+    .media{
+      flex-grow: 1;
+    }
+    .dropdown{
+      height: 35px;
+      .buttom-select-item-music{
+        height: 35px;
+        background-color: white;
+      }
+    }
+  }
+}

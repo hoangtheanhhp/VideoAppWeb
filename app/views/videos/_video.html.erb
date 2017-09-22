@@ -1,0 +1,68 @@
+<li class="list-group-item list-gruop-item-music">
+  <div id="media">
+    <div class="media">
+    <% if !video.banned?  %>
+        <div class="media-left">
+          <%= image_tag("https://img.youtube.com/vi/#{video.uid}/hqdefault.jpg",size: "150x150",id: "img-#{video.uid}", class: "media-object img-thumbnail img-responsive") %>
+        </div>
+        <div class="media-body">
+          <%= link_to content_tag(:h4,video.user.name), video.user, class: "media-heading" %>
+          <%= content_tag( :p, video.title)%>
+          <span class="glyphicon glyphicon-time date"></span> <span><%= time_ago_in_words(video.created_at) %> ago </span>
+        </div>
+
+    <% end %>
+    <% if video.banned? && (current_user.admin? || current_user?(video.user)) %>
+        <div class="media-left" id="img-<%=video.uid%>">
+          <%= image_tag("https://img.youtube.com/vi/#{video.uid}/hqdefault.jpg",size: "150x150", class: "media-object img-thumbnail img-responsive") %>
+        </div>
+        <div class="media-body">
+          <%= link_to content_tag(:h4,video.user.name), video.user, class: "media-heading" %>
+          <%= content_tag(:p, "https://www.youtube.com/watch?v=#{video.uid}", style: "color: #ff0000")%>
+          <span class="glyphicon glyphicon-time date"></span> <span><%= time_ago_in_words(video.created_at) %> ago </span>
+          <strong><%= content_tag(:h4, "Banned", style: "color:red", class: "text-danger") %></strong>
+        </div>
+    <% end %>
+    </div>
+    <div class="dropdown">
+      <button class="btn dropdown-toggle buttom-select-item-music" type="button" data-toggle="dropdown">
+        <i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
+      <ul class="dropdown-menu">
+        <% if current_user.admin? %>
+            <% if session[:list].include? video.uid %>
+                <li><a href="/sessions/drop/<%=video.uid%>">Drop</a></li>
+            <% else %>
+                <li><a href="/sessions/push/<%=video.uid%>">Push</a></li>
+            <% end %>
+            <% if !video.banned? %>
+                <li><a href="/videos/ban/<%=video.uid%>">Ban</a></li>
+            <% end %>
+        <% end %>
+        <li><%= link_to "Delete", video ,id: "menu-delete-#{video.uid}", method: :delete, data: {confirm: "You sure?"} %></li>
+      </ul>
+    </div>
+  </div>
+  <% if false #current_user.admin? %>
+      <% if video.banned? %>
+
+          <a href="/ban/<%=video.id%>" role="button" class="btn btn-danger btn-sm">Banned</a>
+
+      <% else %>
+          <%= link_to  content_tag(:span,"", class:"glyphicon glyphicon-play")+"Play", video,
+                       role: "button", class: "btn btn-primary btn-sm", target: "_blank"%>
+          <!--<a role="button" class="btn btn-primary btn-sm" target="_blank" href="<%= video %>"><span class="glyphicon glyphicon-play"></span> Play</a>-->
+          <!--<a href="/ban/<%=video.id%>" role="button" class="btn btn-info btn-sm">Upvote</a>-->
+          <!--<a href="/ban/<%=video.id%>" role="button" class="btn btn-info btn-sm">Downvote</a>-->
+          <% if session[:list_video].include? video %>
+              <%= link_to "Drop", "/dropvideo/#{video.id}", class: "btn btn-primary btn-sm"%>
+          <% else %>
+              <%= link_to "Push", "/addvideo/#{video.id}", class: "btn btn-primary btn-sm"%>
+          <% end %>
+          <a href="/ban/<%=video.id%>" role="button" class="btn btn-success btn-sm">Ban</a>
+      <% end %>
+  <% end %>
+
+  <% if false #current_user?(video.user) %>
+      <%= link_to "Delete", video,role: "button", class: "btn btn-danger btn-sm", method: :delete, data: {confirm: "You sure?"} %>
+  <% end %>
+</li>

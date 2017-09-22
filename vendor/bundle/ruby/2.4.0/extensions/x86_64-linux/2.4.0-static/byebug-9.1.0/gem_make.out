@@ -1,0 +1,19 @@
+current directory: /home/anh/Project/VideoAppWeb/vendor/bundle/ruby/2.4.0/gems/byebug-9.1.0/ext/byebug
+/usr/local/bin/ruby -r ./siteconf20170914-6401-8d8atc.rb extconf.rb
+creating Makefile
+
+current directory: /home/anh/Project/VideoAppWeb/vendor/bundle/ruby/2.4.0/gems/byebug-9.1.0/ext/byebug
+make "DESTDIR=" clean
+
+current directory: /home/anh/Project/VideoAppWeb/vendor/bundle/ruby/2.4.0/gems/byebug-9.1.0/ext/byebug
+make "DESTDIR="
+compiling breakpoint.c
+compiling byebug.c
+compiling context.c
+compiling locker.c
+compiling threads.c
+linking shared-object byebug/byebug.so
+
+current directory: /home/anh/Project/VideoAppWeb/vendor/bundle/ruby/2.4.0/gems/byebug-9.1.0/ext/byebug
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 byebug.so ./.gem.20170914-6401-c762js/byebug

@@ -1,0 +1,10 @@
+<li class="list-group-item">
+  <h2><%= link_to user.name, user%></h2>
+  <% if current_user.admin? && !current_user?(user) %>
+  <% if !user.admin? %>
+  <%= link_to "Not Admin", "/active/#{user.id}", class: "btn btn-danger" %>
+      <% else %>
+  <%= link_to "Admin", "/active/#{user.id}", class: "btn btn-primary" %>
+      <% end %>
+      <% end %>
+</li>
