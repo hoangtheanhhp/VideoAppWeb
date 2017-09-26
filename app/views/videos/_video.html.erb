@@ -3,7 +3,7 @@
     <div class="media">
     <% if !video.banned?  %>
         <div class="media-left">
-          <%= image_tag("https://img.youtube.com/vi/#{video.uid}/hqdefault.jpg",size: "150x150",id: "img-#{video.uid}", class: "media-object img-thumbnail img-responsive") %>
+          <%= image_tag("https://img.youtube.com/vi/#{video.uid}/hqdefault.jpg",size: "150x120",id: "img-#{video.uid}", class: "media-object img") %>
         </div>
         <div class="media-body">
           <%= link_to content_tag(:h4,video.user.name), video.user, class: "media-heading" %>
@@ -14,7 +14,7 @@
     <% end %>
     <% if video.banned? && (current_user.admin? || current_user?(video.user)) %>
         <div class="media-left" id="img-<%=video.uid%>">
-          <%= image_tag("https://img.youtube.com/vi/#{video.uid}/hqdefault.jpg",size: "150x150", class: "media-object img-thumbnail img-responsive") %>
+          <%= image_tag("https://img.youtube.com/vi/#{video.uid}/hqdefault.jpg",size: "150x120", class: "media-object img") %>
         </div>
         <div class="media-body">
           <%= link_to content_tag(:h4,video.user.name), video.user, class: "media-heading" %>

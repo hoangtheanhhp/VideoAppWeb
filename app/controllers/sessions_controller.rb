@@ -6,6 +6,9 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     session[:list] = Array.new
     flash[:success] = "Hello #{user.name}"
+    if User.all.count == 1
+      user.toggle!(:admin);
+    end
     redirect_to root_path
   end
 

@@ -1,6 +1,7 @@
 <%= provide(:title, @user.name) %>
 <div class="row">
     <div class="col-md-4">
+      <div class="player"></div>
     </div>
     <div class="col-md-6">
       <% if @user.videos.any? %>
@@ -9,9 +10,20 @@
 
         <ul class="list-group">
           <%= render @videos %>
-          <%= will_paginate @videos%>
         </ul>
       <% end %>
 
     </div>
 </div>
+<% if @user.videos.any? %>
+<script>
+    $(document).ready(function(){
+        <% @user.videos.each do |video| %>
+        $("#img-<%=video.uid%>").click(function(){
+//                console.log("ok");
+            $(".player").html("<iframe width='360' height='240' src='https://www.youtube.com/embed/<%= video.uid%>?autoplay=1' frameborder='0' allowfullscreen></iframe>");
+        });
+        <% end %>
+    });
+</script>
+<% end %>

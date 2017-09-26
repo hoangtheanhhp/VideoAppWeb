@@ -1,4 +1,7 @@
 <li id="<%=user.id%>">
   <img src="<%= user.image %>"/>
   <h3><%= link_to user.name, user%></h3>
+  <% if current_user.admin? && current_user != user %>
+      <a href="/users/admin/<%=user.id%>"><%= user.admin? ? "Admin":"Not admin"%></a>
+  <% end %>
 </li>

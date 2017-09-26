@@ -1,19 +1,19 @@
 <%= provide(:title, "Show") %>
 <% if logged_in? %>
     <div class="row">
-      <div class="col-md-4">
-        <%= render 'shared/time'%>
-        <div id="player1"></div>
+      <div class="col-md-7">
+        <div class="player"></div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-5">
         <%= render 'shared/post_form' %>
         <% if @videos.any? %>
-            <ul class="list-group">
+
+                <ul class="list-group">
               <div id="new">
                 <%= render @videos %>
               </div>
             </ul>
-            <%= will_paginate @videos %>
+
       <% end %>
       </div>
     </div>
@@ -21,8 +21,7 @@
         $(document).ready(function(){
             <% @videos.each do |video| %>
             $("#img-<%=video.uid%>").click(function(){
-                console.log("ok");
-                $("#player1").html("<iframe width='360' height='240' src='https://www.youtube.com/embed/<%= video.uid%>?autoplay=1' frameborder='0' allowfullscreen></iframe>");
+                $(".player").html("<iframe width='620' height='480' src='https://www.youtube.com/embed/<%= video.uid%>?autoplay=1' frameborder='0' allowfullscreen></iframe>");
             });
             <% end %>
         });
@@ -38,3 +37,4 @@
     </div>
     </div>
 <%end %>
+

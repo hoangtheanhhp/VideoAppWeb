@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_action :logged_in_user, only: [:ajax]
   def show
     if logged_in?
-      @videos = Video.paginate(page: params[:page], per_page: 10)
+      @videos = Video.all
       @video = current_user.videos.build
     end
   end
@@ -19,9 +19,9 @@ class HomeController < ApplicationController
         time = Time.zone.now.beginning_of_year..Time.zone.now.end_of_year
     end
     if params[:selectNum]!="1"
-      @videos = Video.where(:created_at => time).paginate(page: params[:page], per_page: 10)
+      @videos = Video.where(:created_at => time).all
     else
-      @videos = Video.paginate(page: params[:page], per_page: 10)
+      @videos = Video.all
     end
     render @videos
   end

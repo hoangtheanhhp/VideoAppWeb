@@ -1,7 +1,7 @@
 <%= provide(:title, "Playing") %>
 <div class="row">
   <div class="col-md-6">
-    <iframe width='360' height='240' src='https://www.youtube.com/embed/<%= @list[params[:index].to_i].uid%>?autoplay=1' frameborder='0' allowfullscreen></iframe>
+    <iframe width='560' height='380' src='https://www.youtube.com/embed/<%= @list[params[:index].to_i].uid%>?autoplay=1' frameborder='0' allowfullscreen></iframe>
   </div>
   <div class="col-md-6">
     <ul class="list-group">
@@ -10,10 +10,11 @@
             <div id="media">
               <div class="media">
                     <div class="media-left" id="<%=video.uid%>">
-                      <%= image_tag("https://img.youtube.com/vi/#{video.uid}/hqdefault.jpg",size: "150x150", class: "media-object img-thumbnail img-responsive")%>
+                      <%= image_tag("https://img.youtube.com/vi/#{video.uid}/hqdefault.jpg",size: "150x150", class: "media-object img")%>
                     </div>
                     <div class="media-body">
-                      <%= content_tag( :h5, video.title)%>
+                      <%= content_tag( :h4, video.title)%>
+                      <p><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <%=video.likes%> <i class="fa fa-thumbs-o-down" aria-hidden="true"></i> <%=video.dislikes%></p>
                     </div>
               </div>
             </div>

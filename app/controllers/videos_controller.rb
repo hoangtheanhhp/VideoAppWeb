@@ -15,6 +15,9 @@ class VideosController < ApplicationController
     @video = current_user.videos.build(video_params)
     if @video.save
       flash[:success] = 'Video added!'
+      if !session[:list].include? @video.uid
+        session[:list].unshift @video.uid
+      end
       redirect_to root_url
     else
       render :new

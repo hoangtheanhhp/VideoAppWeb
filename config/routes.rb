@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index]
   root 'home#show'
   get '/list/:index', to: 'list#index', as: 'list_videos'
+  get '/users/admin/:id', to: 'users#admin', as: 'user_active'
 end

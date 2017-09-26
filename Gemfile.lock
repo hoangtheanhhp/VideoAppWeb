@@ -48,6 +48,7 @@ GEM
       sass (~> 3.2)
     bootstrap-social-rails (4.12.0)
       railties (>= 3.1)
+    bootstrap-toggle-rails (2.2.1.0)
     bootstrap-will_paginate (1.0.0)
       will_paginate
     builder (3.2.3)
@@ -224,6 +225,7 @@ DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass
   bootstrap-social-rails
+  bootstrap-toggle-rails
   bootstrap-will_paginate
   byebug
   capybara (~> 2.13)

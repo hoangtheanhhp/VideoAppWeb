@@ -16,6 +16,7 @@ gem 'jquery-ui-rails'
 gem 'jquery-rails'
 gem 'rails-observers'
 gem 'font-awesome-sass'
+gem 'bootstrap-toggle-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use mysql as the database for Active Record
