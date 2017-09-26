@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
     #puts request.env["omniauth.auth"].to_json, 'aaaaaaaaaaaaaaaaaaa'
     user = User.from_omniauth(request.env["omniauth.auth"])
     session[:user_id] = user.id
+    session[:list] = Array.new
     flash[:success] = "Hello #{user.name}"
     redirect_to root_path
   end

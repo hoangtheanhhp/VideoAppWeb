@@ -1,10 +1,10 @@
+<%= provide(:title, "Playing") %>
 <div class="row">
   <div class="col-md-6">
-    <div id="player"></div>
+    <iframe width='360' height='240' src='https://www.youtube.com/embed/<%= @list[params[:index].to_i].uid%>?autoplay=1' frameborder='0' allowfullscreen></iframe>
   </div>
   <div class="col-md-6">
     <ul class="list-group">
-      <button class="btn btn-info">Play</button>
       <% @list.each do |video| %>
           <li class="list-group-item">
             <div id="media">
@@ -23,46 +23,9 @@
   </div>
 </div>
 <script>
-    var tag = document.createElement('script');
-    tag.src = "http://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-            height: '320',
-            width: '520',
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-            }
-        });
-    }
-
-    var videos = new Array();
-    <% @list.each do |video|%>
-        videos.push({vid: '<%=video.uid%>',startSeconds: 0});
-    <% end %>
-    var index = 0;
-    // 4. The API will call this function when the video player is ready.
-    function onPlayerReady(event) {
-        event.target.cueVideoById({
-            videoId: videos[index].vid,
-            startSeconds: videos[index].startSeconds
-        });
-        event.target.playVideo();
-    }
-
-    function onPlayerStateChange(event) {
-        if (event.data === YT.PlayerState.ENDED) {
-            if (index < videos.count() - 1) {
-
-                event.target.loadVideoById({
-                    videoId: videos[index].vid,
-                    startSeconds: videos[index].startSeconds
-                });
-                index++;
-            }
-        }
-    }
+    $(document).ready(function () {
+        window.setTimeout(function () {
+            location.href = '/list/<%=@next_video_index%>';
+        },<%=@list[params[:index].to_i].duration*1000%>);
+    });
 </script>

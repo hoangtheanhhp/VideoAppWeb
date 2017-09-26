@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916175723) do
+ActiveRecord::Schema.define(version: 20170924041005) do
 
   create_table "musics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "link"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20170916175723) do
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
     t.string "image"
+    t.timestamp "banned"
   end
 
   create_table "videos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(version: 20170916175723) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "banned"
+    t.integer "duration"
     t.index ["uid"], name: "index_videos_on_uid"
     t.index ["user_id", "created_at"], name: "index_videos_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_videos_on_user_id"

@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   get 'videos/ban', to: 'videos#ban', as: 'ban'
   resources :users, only: [:show, :index]
   root 'home#show'
-  get '/list', to: 'list#index', as: 'list_videos'
+  get '/list/:index', to: 'list#index', as: 'list_videos'
 end

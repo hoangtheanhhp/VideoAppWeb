@@ -24,17 +24,6 @@
                 console.log("ok");
                 $("#player1").html("<iframe width='360' height='240' src='https://www.youtube.com/embed/<%= video.uid%>?autoplay=1' frameborder='0' allowfullscreen></iframe>");
             });
-            $("#menu-push-<%=video.uid%>").click(function(){
-                $.get("/sessions/push/<%=video.uid%>");
-                $("#1").html('<li><a id="menu-drop-<%=video.uid%>">Drop</a>');
-            });
-            $("#menu-drop-<%=video.uid%>").click(function(){
-                $.get("/sessions/drop/<%=video.uid%>");
-                $("#2").html('<li><a id="menu-push-<%=video.uid%>">Push</a>');
-            });
-            $("#menu-ban-<%=video.uid%>").click(function(){
-                $.get("/videos/ban/<%=video.uid%>");
-            });
             <% end %>
         });
     </script>

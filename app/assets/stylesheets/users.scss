@@ -1,3 +1,57 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-list {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  div {
+    margin: 20px;
+  }
+
+  ul {
+    list-style-type: none;
+    width: 500px;
+  }
+
+  h3 {
+    font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+    a {
+      text-decoration: none;
+      color: #0f0f0f;
+      background-color: rgba(0,0,0,0);
+    }
+    a:hover {
+      color: darkgray;
+    }
+  }
+
+  li img {
+    float: left;
+    margin: 0 15px 0 0;
+    max-width: 20%;
+  }
+
+  li {
+    padding: 10px;
+    overflow: auto;
+  }
+
+  li:hover {
+    background: #fff3c2;
+    cursor: pointer;
+  }
+}
+
+img#img-avatar {
+  //width: 50%;
+  width: 200px;
+}
+
+#user-info {
+  margin: auto;
+  text-align: center;
+}

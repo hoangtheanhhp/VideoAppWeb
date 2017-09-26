@@ -1,9 +1,23 @@
 <%= provide(:title,"List user") %>
 <div class="row">
-  <div class="col-md-6 col-md-offset-4">
-    <ul class="list-group">
+  <div class="col-md-6">
+    <div id="user-info"></div>
+  </div>
+  <div class="col-md-6 user-list">
+    <ul>
       <%= render @users %>
       <%= will_paginate @users %>
     </ul>
   </div>
 </div>
+<script>
+  $(document).ready(function(){
+     <% @users.each do |user|%>
+      $("#<%=user.id%>").mouseenter(function(){
+         $("#user-info").html(
+           "  <img src='<%=user.image%>' id='img-avatar'>"
+         );
+      });
+     <% end %>
+  });
+</script>
